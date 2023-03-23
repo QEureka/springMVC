@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>查看所有雇佣信息</title>
+</head>
+<body>
+<table id="dataTable" border="1" cellspacing="0" cellpadding="0" style="text-align: center">
+    <tr>
+        <th colspan="5">Employee Info</th>
+    </tr>
+    <tr>
+        <td>id</td>
+        <td>lastName</td>
+        <td>email</td>
+        <td>gender</td>
+        <td>options(<a th:href="@{/toAdd}">ADD</a>)</td>
+    </tr>
+    <tr th:each="employee:${AllEmpleoyee}">
+        <td th:text="${employee.id}">id</td>
+        <td th:text="${employee.lastName}">lastName</td>
+        <td th:text="${employee.email}">email</td>
+        <td th:text="${employee.gender}">gender</td>
+        <td>
+            <a @click="deleteEmployee" th:href="@{'/employee/'+${employee.id}}">删除</a>
+            <!-- <a th:href="@{/employee/}+${employee.id}">删除</a>-->
+            <!-- <a th:href="@{/employee}">修改</a>-->
+            <!-- <a>delete</a>-->
+            <!-- <a>update</a>-->
+            <!-- <a  th:href="@{/update}">修改</a>-->
+            <a th:href="@{'/employee/'+${employee.id}}">修改</a>
+            <!--            <a @click="updateEmployee" th:href="@{'/employee/'+${employee.id}}">修改</a>-->
+        </td>
+    </tr>
+
+</table>
+<form id="deleteForm" method="post">
+    <input type="hidden" name="_method" value="delete">
+</form>
+<!--<form id="updateForm" method="post">-->
+<!--    <input type="hidden" name="_method" value="put">-->
+<!--</form>-->
+
+<!--通过vue来利用表单对超链接进行提交-->
+<script type="text/javascript" th:src="@{/static/js/vue.js}"></script>
+<script type="text/javascript">
+    var vue = new Vue({
+        el: "#dataTable",
+        methods: {
+            deleteEmployee: function (event) {
+                //获取到form表单
+                var deleteForm = document.getElementById("deleteForm");
+                //将触发点击事件的超链接的href属性赋值给表单的action
+                deleteForm.action = event.target.href;
+                //提交表单
+                deleteForm.submit();
+                //取消超链接的默认行为：页面跳转
+                event.preventDefault();
+            }
+            // updateEmploy:function (event) {
+            //     var updateForm= document.getElementById("updateForm");
+            //     updateForm.action=event.target.href;
+            //     updateForm.submit();
+            // }
+
+        }
+    });
+</script>
+</body>
+</html>

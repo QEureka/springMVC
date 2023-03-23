@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<a th:href="@{/testModelAndView}">通过ModelAndView向Request域中设置数据</a>
+<a th:href="@{/testSession}">向session中共享数据</a>
+<a th:href="@{/testApplication}">向Application中共享数据</a>
+<!--发送put和delet请求-->
+<form th:action="@{/toSuccess}" method="post">
+<input type="hidden" name="_method" value="put">
+    用户名：<input type="text" name="username">
+    密码：<input type="password" name="password">
+    <input type="submit"value="修改" >
+</form>
+</body>
+</html>

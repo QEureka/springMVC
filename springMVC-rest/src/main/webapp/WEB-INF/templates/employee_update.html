@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>UPDATE</title>
+</head>
+<body>
+<form th:action="@{/employee}" method="post">
+    <!--    实现回显功能-->
+    <input type="hidden" name="id" th:value="${temEmployee.id}">
+    <input type="hidden" name="_method" value="put">
+    lastName:<input type="text" name="lastName" th:value="${temEmployee.lastName}"><br>
+    email:<input type="text" name="email" th:value="${temEmployee.email}"><br>
+    <!--    会将temEmployee.gender的值与value中的值进行比较如果相同则添加checked=checked-->
+    gender:<input type="radio" name="gender" value="1" th:field="${temEmployee.gender}">male
+    <input type="radio" name="gender" value="0" th:field="${temEmployee.gender}">female<br>
+    <input type="submit" value="update"><br>
+</form>
+</body>
+</html>
